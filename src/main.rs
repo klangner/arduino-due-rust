@@ -9,13 +9,13 @@ use sam3x::*;
 
 
 extern {
-    static _estack: u32;
+    static _ESTACK: u32;
 }
 
 #[link_section=".vectors"]
 pub static VECTOR_TABLE: VectorTable = unsafe {
     VectorTable {
-        initial_stack_pointer_value: &_estack,
+        initial_stack_pointer_value: &_ESTACK,
         reset_handler              : start,
         other_interrupt_vectors    : [0; 44],
     }
