@@ -1,11 +1,12 @@
 [package]
 name = "due-blink"
 version = "0.1.0"
-authors = ["klangner <klangner@gmail.com>"]
+authors = ["Krzysztof Langner <klangner@gmail.com>"]
+
 
 [dependencies]
-#cortex-m = "0.1.5"
+
 
 [profile.release]
-# Add link-time optimization to minimize code size
+# Add link-time optimization to minimize the code size.
 lto = true

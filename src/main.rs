@@ -1,32 +1,9 @@
-#![feature(lang_items, start)]
+#![feature(lang_items)]
 #![no_std]
 #![no_main]
 
 
-//extern crate core;
-//extern crate cortex_m;
-
-//use core::prelude::*;
-//use cortex_m::asm::{nop};
-
-
-// -------------------------------------------------------------------------------------------------
-// This stuff is necessary by std
-// -------------------------------------------------------------------------------------------------
-
-#[lang = "panic_fmt"]
-#[no_mangle]
-pub extern "C" fn panic_fmt() -> ! { loop {} }
-
-//#[lang = "stack_exhausted"]
-//pub extern fn stack_exhausted() { loop {} }
-
-#[lang = "eh_personality"]
-pub extern fn eh_personality() { loop {} }
-
-#[no_mangle]
-pub extern fn __aeabi_unwind_cpp_pr0() { loop {} }
-
+pub mod rust_base;
 
 // -------------------------------------------------------------------------------------------------
 // Here starts the coded needed by controller
@@ -103,9 +80,9 @@ fn start() {
         // purpose of this program.
         loop {
             *PB_SET_OUTPUT_DATA = PB27_MASK;
-            sleep_ms(50);
+            sleep_ms(1000);
             *PB_CLEAR_OUTPUT_DATA = PB27_MASK;
-            sleep_ms(50);
+            sleep_ms(1000);
         }
     }
 }
