@@ -4,3 +4,8 @@ version = "0.1.0"
 authors = ["klangner <klangner@gmail.com>"]
 
 [dependencies]
+#cortex-m = "0.1.5"
+
+[profile.release]
+# Add link-time optimization to minimize code size
+lto = true

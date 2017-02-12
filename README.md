@@ -15,16 +15,9 @@ rustup toolchain install nightly
 cargo install xargo
 ```
 
-## Compile
+## Compile & Run
 
 ```sh
 xargo build
+./upload.sh
 ```
-
-
-## Some commands
-
-```bash
-```
-
-
