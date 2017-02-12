@@ -5,6 +5,7 @@ authors = ["Krzysztof Langner <klangner@gmail.com>"]
 
 
 [dependencies]
+sam3x = { path = "sam3x" }
 
 
 [profile.release]

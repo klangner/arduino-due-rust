@@ -1,0 +1,11 @@
+[package]
+name = "sam3x"
+version = "0.1.0"
+build = "build.rs"
+description = "Atmel SAM3X ARM-based MCU"
+keywords = ["arm", "cortex-m", "sam3x", "atmel"]
+authors = ["Krzysztof Langner <klangner@gmail.com>"]
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+
