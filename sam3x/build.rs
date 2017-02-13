@@ -116,6 +116,12 @@ SECTIONS
         *(.stack*)
     } > ram
 
+    /* Set stack top to end of ram, and stack limit move down by
+     * size of stack_dummy section */
+    __StackTop = ORIGIN(ram) + LENGTH(ram);
+    __StackLimit = __StackTop - SIZEOF(.stack_dummy);
+    PROVIDE(_sstack = __StackLimit);
+    PROVIDE(_estack = __StackTop);
 }
 ";
 
