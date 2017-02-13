@@ -1,14 +1,7 @@
 #![no_std]
 
-// Top of the stack is needed by VectorTable.
-//extern {
-//    static _estack: u32;
-//}
-
-
 // This table is used to initialize MCU
 pub struct VectorTable {
-    pub initial_stack_pointer_value : &'static u32,
     pub reset_handler               : fn()->!,
     pub other_interrupt_vectors     : [u32; 44],
 }
@@ -20,7 +13,6 @@ pub struct VectorTable {
 //#[link_section=".vectors"]
 //pub static VECTOR_TABLE: VectorTable = unsafe {
 //    VectorTable {
-//        initial_stack_pointer_value: &_estack,
 //        reset_handler              : reset_handler,
 //        other_interrupt_vectors    : [0; 44],
 //    }
@@ -41,16 +33,3 @@ pub const TIMER_MODE_REGISTER : *mut   u32 = 0x400E1A30 as *mut   u32;
 pub const TIMER_VALUE_REGISTER: *const u32 = 0x400E1A38 as *const u32;
 
 
-//// This handler is called after board starts or RESET button is pressed.
-//fn reset_handler(){
-//    extern "Rust" {
-//        fn start();
-//    }
-//
-//    unsafe {
-//        start();
-//    }
-//
-//    // safety net in case `main` returns
-//    panic!("returned from `main`!");
-//}

@@ -8,18 +8,13 @@ pub mod rust_base;
 use sam3x::*;
 
 
-extern {
-    static _ESTACK: u32;
-}
-
 #[link_section=".vectors"]
-pub static VECTOR_TABLE: VectorTable = unsafe {
+pub static VECTOR_TABLE: VectorTable =
     VectorTable {
-        initial_stack_pointer_value: &_ESTACK,
         reset_handler              : start,
         other_interrupt_vectors    : [0; 44],
-    }
-};
+    };
+
 
 // As the name suggests, this function sleeps for a given number of milliseconds.
 fn sleep_ms(milliseconds: u32) {
@@ -45,9 +40,9 @@ fn start() -> ! {
         // purpose of this program.
         loop {
             *PB_SET_OUTPUT_DATA = PB27_MASK;
-            sleep_ms(100);
+            sleep_ms(500);
             *PB_CLEAR_OUTPUT_DATA = PB27_MASK;
-            sleep_ms(100);
+            sleep_ms(500);
         }
     }
 }

@@ -24,7 +24,7 @@ SECTIONS
 {
     .text :
     {
-        . = ALIGN(4);
+        LONG(ORIGIN(ram) + LENGTH(ram));
         _sfixed = .;
         KEEP(*(.vectors .vectors.*))
         *(.text .text.* .gnu.linkonce.t.*)
@@ -116,12 +116,6 @@ SECTIONS
         *(.stack*)
     } > ram
 
-    /* Set stack top to end of ram, and stack limit move down by
-     * size of stack_dummy section */
-    __StackTop = ORIGIN(ram) + LENGTH(ram);
-    __StackLimit = __StackTop - SIZEOF(.stack_dummy);
-    PROVIDE(_sstack = __StackLimit);
-    PROVIDE(_ESTACK = __StackTop);
 }
 ";
 
