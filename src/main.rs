@@ -6,6 +6,7 @@ extern crate sam3x;
 
 pub mod rust_base;
 use sam3x::*;
+use sam3x::pio::{PIO_B, P27};
 
 
 #[link_section=".vectors"]
