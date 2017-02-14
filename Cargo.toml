@@ -1,11 +1,11 @@
 [package]
-name = "due-blink"
+name = "arduino-due-rust"
 version = "0.1.0"
 authors = ["Krzysztof Langner <klangner@gmail.com>"]
 
 
 [dependencies]
-sam3x = { path = "sam3x" }
+sam3x = { path = "../sam3x" }
 
 
 [profile.release]
