@@ -1,4 +1,4 @@
-# blinking led example written in Rust for Arduino Due
+# Demo program written in Rust for Arduino Due.
 
 This project is based on:
 
