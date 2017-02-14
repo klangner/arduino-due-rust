@@ -24,13 +24,13 @@ fn sleep_ms(milliseconds: u32) {
     }
 }
 
-// this function is called
-// function for the reset interrupt.
+/// Main function connected to the reset handler
+/// Arduino Led is connected to the controller: B, pin: 27
 fn start() -> ! {
     unsafe {
         // Enable PB27 (pin 13) and configure it for output.
-        *PB_PIO_ENABLE    = PB27_MASK;
-        *PB_OUTPUT_ENABLE = PB27_MASK;
+        (*PIO_B).pio_enable    = P27;
+        (*PIO_B).output_enable = P27;
 
         // Set the timer to a resolution of a millisecond.
         *TIMER_MODE_REGISTER = 0x00000020;
@@ -39,10 +39,10 @@ fn start() -> ! {
         // blinks the Due's built-in LED, which is the single
         // purpose of this program.
         loop {
-            *PB_SET_OUTPUT_DATA = PB27_MASK;
-            sleep_ms(500);
-            *PB_CLEAR_OUTPUT_DATA = PB27_MASK;
-            sleep_ms(500);
+            (*PIO_B).set_output_data = P27;
+            sleep_ms(200);
+            (*PIO_B).clear_output_data = P27;
+            sleep_ms(800);
         }
     }
 }
