@@ -33,15 +33,15 @@ fn start() -> ! {
     unsafe {
         // Set the timer to a resolution of a millisecond.
         *TIMER_MODE_REGISTER = 0x00000020;
+    }
 
-        // Continuously set and clear output on PB27 (pin 13). This
-        // blinks the Due's built-in LED, which is the single
-        // purpose of this program.
-        loop {
-            pb27.on();
-            sleep_ms(200);
-            pb27.off();
-            sleep_ms(800);
-        }
+    // Continuously set and clear output on PB27 (pin 13). This
+    // blinks the Due's built-in LED, which is the single
+    // purpose of this program.
+    loop {
+        pb27.on();
+        sleep_ms(200);
+        pb27.off();
+        sleep_ms(800);
     }
 }
