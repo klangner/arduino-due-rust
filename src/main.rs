@@ -13,15 +13,15 @@ use sam3x::rtt;
 #[link_section=".vectors"]
 pub static VECTOR_TABLE: VectorTable =
     VectorTable {
-        reset_handler              : start,
-        other_interrupt_vectors    : [0; 44],
+        reset_handler : start,
+        exceptions    : [0; 14],
     };
 
 
 /// Main function connected to the reset handler
-/// Arduino Led is connected to the controller: B, pin: 27
+/// Arduino Led is connected to the controller B, line 27
 fn start() -> ! {
-    let pb27 = pio::pin(pio::Port::B, 27, pio::Mode::Output).expect("Can't connect to the led");
+    let pb27 = pio::BinaryPin::init(pio::Port::B, 27, pio::Mode::Output).expect("Can't connect to the led");
 
     //We need to initialize timer before we can use it
     rtt::init_timer();
