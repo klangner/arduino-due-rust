@@ -9,3 +9,4 @@ pub extern "C" fn panic_fmt() -> ! { loop {} }
 
 // This function is needed by arm exception handling routines.
 #[no_mangle] pub extern fn __aeabi_unwind_cpp_pr0() { loop {} }
+#[no_mangle] pub extern fn __aeabi_unwind_cpp_pr1() { loop {} }
