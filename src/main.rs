@@ -6,8 +6,8 @@ extern crate sam3x;
 
 pub mod rust_base;
 use sam3x::*;
-use sam3x::pio;
-use sam3x::rtt;
+use sam3x::drivers::led::{Led, Port};
+use sam3x::hardware::rtt;
 
 
 #[link_section=".vectors"]
@@ -21,7 +21,7 @@ pub static VECTOR_TABLE: VectorTable =
 /// Main function connected to the reset handler
 /// Arduino Led is connected to the controller B, line 27
 fn start() -> ! {
-    let pb27 = pio::BinaryPin::init(pio::Port::B, 27, pio::Mode::Output).expect("Can't connect to the led");
+    let pb27 = Led::connect(Port::B, 27).expect("Wrong pin for led.");
 
     //We need to initialize timer before we can use it
     rtt::init_timer();
@@ -29,8 +29,8 @@ fn start() -> ! {
     // Blink led
     loop {
         pb27.on();
-        rtt::wait(100);
+        rtt::wait(200);
         pb27.off();
-        rtt::wait(100);
+        rtt::wait(900);
     }
 }
