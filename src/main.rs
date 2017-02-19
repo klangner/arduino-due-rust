@@ -37,13 +37,9 @@ fn start() -> ! {
 
     // We execute functionality in never ending loop
     loop {
-        led.on();
         wait_ms(100);
         if button.is_pressed() {
             led.on()
-        } else {
-            led.off()
         };
-        wait_ms(100);
     }
 }
