@@ -11,6 +11,7 @@ use sam3x::drivers::led::{Led};
 use sam3x::drivers::button::{Button};
 use sam3x::hardware::rtt::{init_timer, wait_ms};
 use sam3x::hardware::pmc::{enable_peripheral_clk};
+use sam3x::hardware::wdt;
 
 
 #[link_section=".vectors"]
@@ -37,6 +38,7 @@ fn start() -> ! {
 
     // We execute functionality in never ending loop
     loop {
+        wdt::restart_watchdog();
         wait_ms(100);
         if button.is_pressed() {
             led.on()
