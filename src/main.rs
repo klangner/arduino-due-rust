@@ -37,11 +37,23 @@ fn start() -> ! {
     let button = Button::connect(Peripheral::PioC, 22).expect("Wrong pin for button.");
 
     // We execute functionality in never ending loop
+    let mut last_pressed = false;
+    let mut led_on = false;
     loop {
         wdt::restart_watchdog();
         wait_ms(100);
-        if button.is_pressed() {
-            led.on()
-        };
+        if button.is_pressed(){
+            if last_pressed == false {
+                if led_on {
+                    led.off()
+                } else {
+                    led.on()
+                }
+                led_on = !led_on;
+            }
+            last_pressed = true;
+        } else {
+            last_pressed = false;
+        }
     }
 }
