@@ -10,8 +10,9 @@ use sam3x::hardware::peripherals::{Peripheral};
 use sam3x::drivers::led::{Led};
 use sam3x::drivers::button::{Button};
 use sam3x::hardware::rtt::{init_timer, wait_ms};
-use sam3x::hardware::pmc::{enable_peripheral_clk};
+use sam3x::hardware::pmc;
 use sam3x::hardware::wdt;
+use sam3x::hardware::uart;
 
 
 #[link_section=".vectors"]
@@ -30,20 +31,25 @@ fn start() -> ! {
     // We need timer
     init_timer();
     // We need to enable clock for Port C before we can use it as input
-    enable_peripheral_clk(Peripheral::PioC);
+    pmc::enable_peripheral_clock_0(Peripheral::PioC);
 
     // Now we can initialize state
     let led = Led::connect(Peripheral::PioB, 27).expect("Wrong pin for led.");
     let button = Button::connect(Peripheral::PioC, 22).expect("Wrong pin for button.");
+    let tx = uart::Tx::init(uart::BR_9600);
 
     // We execute functionality in never ending loop
+//    tx.write("Initialize\n");
     let mut last_pressed = false;
-    let mut led_on = false;
+    let mut led_on = true;
+    led.on();
     loop {
+        tx.write("a");
         wdt::restart_watchdog();
-        wait_ms(100);
+        wait_ms(200);
         if button.is_pressed(){
             if last_pressed == false {
+                tx.write("Button pressed\n");
                 if led_on {
                     led.off()
                 } else {
