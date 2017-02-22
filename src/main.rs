@@ -6,13 +6,13 @@ extern crate sam3x;
 
 pub mod rust_base;
 use sam3x::*;
-use sam3x::hardware::peripherals::{Peripheral};
+use sam3x::hal::peripherals::{Peripheral};
 use sam3x::drivers::led::{Led};
 use sam3x::drivers::button::{Button};
-use sam3x::hardware::rtt::{init_timer, wait_ms};
-use sam3x::hardware::pmc;
-use sam3x::hardware::wdt;
-use sam3x::hardware::uart;
+use sam3x::hal::rtt::{init_timer, wait_ms};
+use sam3x::hal::pmc;
+use sam3x::hal::wdt;
+use sam3x::hal::uart;
 
 
 #[link_section=".vectors"]
